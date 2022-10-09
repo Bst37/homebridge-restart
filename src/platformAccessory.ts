@@ -29,10 +29,10 @@ export class RestartPlatformAccessory {
 
     this.service = this.accessory.getService('Restart Timer') ||
       this.accessory.addService(this.platform.Service.PowerManagement, 'Restart Timer', 'RestartTimer');
-    this.service.setCharacteristic(this.platform.Characteristic.Name, 'Restart at ' + this.platform.config.cron.replaceAll(' ', ' '));
+    this.service.setCharacteristic(this.platform.Characteristic.Name, 'Restart at ' + this.platform.config.cron.replaceAll(/\s+/g, ' '));
 
     this.platform.log.info('Sheduling restart at ' + this.platform.config.cron);
-    this.restartJob = new Cron(this.platform.config.cron.replaceAll(' ', ' '), () => {
+    this.restartJob = new Cron(this.platform.config.cron.replaceAll(/\s+/g, ' '), () => {
       this.doRestart();
     });
   }
