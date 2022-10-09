@@ -1,0 +1,23 @@
+{
+  "pluginAlias": "RestartHomebridgePlugin",
+  "pluginType": "platform",
+  "singular": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "required": true,
+        "default": "Restart"
+      },
+      "cron": {
+        "title": "Calendar",
+        "type": "string",
+        "required": true,
+        "default": "00 00 03 * * 2,4",
+        "description": "second minute hour dayofmonth month dayofweek (https://www.npmjs.com/package/croner#pattern)"
+      }
+    }
+  }
+}
