@@ -32,8 +32,10 @@ export class RestartPlatformAccessory {
     this.service.setCharacteristic(this.platform.Characteristic.Name, 'Restart at ' + this.platform.config.cron.replaceAll(/\s+/g, ' '));
 
     this.platform.log.info('Sheduling restart at ' + this.platform.config.cron);
-    this.restartJob = new Cron(this.platform.config.cron.replaceAll(/\s+/g, ' '), () => {
-      this.doRestart();
-    });
+    if (this.platform.config.cron) {
+      this.restartJob = new Cron(this.platform.config.cron.replaceAll(/\s+/g, ' '), () => {
+        this.doRestart();
+      });
+    }
   }
 }
